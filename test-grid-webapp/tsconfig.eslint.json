@@ -4,6 +4,9 @@
     "noEmit": true,
     "strict": true
   },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": ["warn", { "vars": "all", "varsIgnorePattern": "^(it|el|element|item|_)$", "args": "all", "argsIgnorePattern": "^(it|el|element|item|_)$", "caughtErrors":  "all", "caughtErrorsIgnorePattern": "^(it|el|element|item|_)$" }]
+  },
   "include": [
     "src"
   ]
