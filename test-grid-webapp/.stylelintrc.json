@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-prettier"
+  ],
+  "ignoreFiles": ["node_modules/**", "**/*.json", "**/*.test.js", "**/*.html", "**/*.svg", "**/*.png", "**/*.jpg", "src/styles/*"],
+  "rules": {
+    "color-no-invalid-hex": true,
+    "selector-class-pattern": "^[a-z][a-zA-Z0-9]+$"
+  },
+  "defaultSeverity": "warning"
+}
