@@ -1,10 +1,10 @@
 import React, { ReactElement, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CABINET_ROUTE, LOGIN_ROUTE } from "../../models/routes";
 import useAuthSelectors from "../../store/selectors/auth";
 
 function RouterManagement(): ReactElement {
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
   const {
     user: { id }
@@ -16,7 +16,7 @@ function RouterManagement(): ReactElement {
     }
     checkAuthentication();
     // eslint-disable-next-line
-  }, [location, id]);
+  }, [id]);
 
   return <></>;
 }

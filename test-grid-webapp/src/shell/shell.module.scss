@@ -1,0 +1,16 @@
+@import "src/styles/styles";
+
+.header {
+  height: 70px;
+  background-color: v(standard-bg);
+}
+
+.main {
+  flex-grow: 1;
+  background-color: v(color-bg);
+  color: v(color-text);
+}
+.footer {
+  height: 50px;
+  background-color: v(classic-bg);
+}
