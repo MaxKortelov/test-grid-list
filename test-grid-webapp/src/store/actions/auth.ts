@@ -1,19 +1,22 @@
 import { IUser, UserAction } from "../../models/store/auth";
-import { Dispatch } from "redux";
 import { UserActionTypes } from "../types/auth";
 import { api } from "../../api";
 import { AxiosResponse } from "axios";
 import { ILoginParams } from "../../models/login";
+import { ThunkAction } from "redux-thunk";
+import { RootState } from "../reducers";
 
 // effects
-export const fetchUserData = (loginParams: ILoginParams) => async (dispatch: Dispatch<UserAction>) => {
-  api
-    .get<AxiosResponse<IUser>>("login", {
-      params: loginParams
-    })
-    .then((auth) => dispatch(login(auth.data.data)))
-    .catch(() => dispatch(loginError("Invalid user")));
-};
+export const fetchUserData =
+  (loginParams: ILoginParams): ThunkAction<void, RootState, unknown, UserAction> =>
+  async (dispatch) => {
+    api
+      .get<AxiosResponse<IUser>>("login", {
+        params: loginParams
+      })
+      .then((auth) => dispatch(login(auth.data.data)))
+      .catch(() => dispatch(loginError("Invalid user")));
+  };
 
 // actions
 export const login = (user: IUser): UserAction => {
