@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CABINET_ROUTE, INITIAL_ROUTE, LOGIN_ROUTE } from "../../models/routes";
+import { CABINET_ROUTE, LOGIN_ROUTE } from "../../models/routes";
 import useAuthSelectors from "../../store/selectors/auth";
 
 function RouterManagement(): ReactElement {
@@ -11,20 +11,12 @@ function RouterManagement(): ReactElement {
   } = useAuthSelectors();
   useEffect(() => {
     function checkAuthentication(): void {
-      switch (location.pathname) {
-        case INITIAL_ROUTE: {
-          const isAuthentified = id.length > 0;
-          return isAuthentified ? navigate(CABINET_ROUTE) : navigate(LOGIN_ROUTE);
-        }
-        default: {
-          break;
-        }
-      }
+      const isAuthorized = id.length > 0;
+      return isAuthorized ? navigate(CABINET_ROUTE) : navigate(LOGIN_ROUTE);
     }
-
     checkAuthentication();
     // eslint-disable-next-line
-  }, []);
+  }, [location, id]);
 
   return <></>;
 }

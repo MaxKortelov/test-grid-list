@@ -8,10 +8,9 @@ import {
   MODAL_TYPE
 } from "../../models/modal-popover";
 import LargeModal from "./large-modal/large-modal";
-// import LargeModal from "./largeModal/largeModal";
 
 const ModalContext: React.Context<IModalContext> = React.createContext({
-  showModal: (options: IModalOptions) => {
+  showModal: (it: IModalOptions) => {
     return new Promise((resolve) => resolve(new Error("showModal context is not created yet")));
   },
   successModal: () => {

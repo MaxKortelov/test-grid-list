@@ -1,7 +1,9 @@
 import { UserActionTypes } from "../../store/types/auth";
+import { LOADING_STATE } from "../bootstrap";
 
 export interface IAuthState {
   user: IUser;
+  state: LOADING_STATE;
 }
 
 export interface IUser {
@@ -11,22 +13,28 @@ export interface IUser {
   surname: string;
 }
 
-export function loadAuthData(): { user: IUser } {
+export function loadAuthData(): IAuthState {
   return {
     user: {
-      id: "",
+      id: "123",
       email: "",
       name: "Unknown",
       surname: ""
-    }
+    },
+    state: LOADING_STATE.INITIAL
   };
 }
 
 //actions
 
 export interface IFetchUserData {
-  type: UserActionTypes.FETCH_USER;
-  payload: IAuthState;
+  type: UserActionTypes.LOGIN;
+  payload: IUser;
 }
 
-export type UserAction = IFetchUserData;
+export interface ILoginError {
+  type: UserActionTypes.LOGIN_ERROR;
+  payload: string;
+}
+
+export type UserAction = IFetchUserData | ILoginError;

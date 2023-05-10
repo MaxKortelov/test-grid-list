@@ -2,14 +2,18 @@ import React from "react";
 import classNames from "classnames";
 import { Button, Form } from "react-bootstrap";
 import styles from "./login.module.scss";
+import { useActions } from "../../hooks/useActions";
+import { ILoginParams } from "../../models/login";
 
 function Login() {
+  const { fetchUserData } = useActions();
+
   const login = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     event.stopPropagation();
     const formData = new FormData(event.target as HTMLFormElement);
-    const formProps = Object.fromEntries(formData);
-    console.log(formProps);
+    const formProps: ILoginParams = Object.fromEntries(formData) as unknown as ILoginParams;
+    fetchUserData(formProps);
   };
 
   return (

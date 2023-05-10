@@ -1,3 +1,4 @@
 export enum UserActionTypes {
-  FETCH_USER = "FETCH_USER"
+  LOGIN = "LOGIN",
+  LOGIN_ERROR = "LOGIN_ERROR"
 }
