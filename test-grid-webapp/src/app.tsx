@@ -10,6 +10,7 @@ import "./styles/styles.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import RouterManagement from "./pages/router-management/router-management";
 import useSettingsSelectors from "./store/selectors/settings";
+import ErrorBoundary from "./pages/error-boundary/error-boundary";
 
 //cabinet
 const Login = lazy(() => import("./pages/login/login"));
@@ -26,7 +27,7 @@ function App() {
           <Routes>
             <Route path={LOGIN_ROUTE} element={<Login />} />
             <Route path={CABINET_ROUTE} element={<Shell />}>
-              <Route path={CABINET_RECORDS_ROUTE} element={<Records />} />
+              <Route path={CABINET_RECORDS_ROUTE} element={<Records />} errorElement={<ErrorBoundary />} />
             </Route>
             <Route path={ANY_ROUTE} element={<NotFound />} />
           </Routes>

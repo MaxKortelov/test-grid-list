@@ -1,13 +1,14 @@
-import React from "react";
-import { BrightnessHighFill, MoonFill, Outlet } from "react-bootstrap-icons";
+import React, { ReactElement } from "react";
+import { BrightnessHighFill, MoonFill } from "react-bootstrap-icons";
 import styles from "./shell.module.scss";
 import classNames from "classnames";
 import { Button } from "react-bootstrap";
 import useSettingsSelectors from "../store/selectors/settings";
 import { THEME } from "../models/store/settings";
 import { useActions } from "../hooks/useActions";
+import { Outlet } from "react-router-dom";
 
-function Shell() {
+function ShellWrap({ children }: { children: ReactElement }) {
   const { theme } = useSettingsSelectors();
   const { changeTheme } = useActions();
 
@@ -28,11 +29,17 @@ function Shell() {
           {theme === THEME.DARK ? <MoonFill /> : <BrightnessHighFill />}
         </Button>
       </div>
-      <div className={classNames("w-100 ", styles.main)}>
-        <Outlet />
-      </div>
+      <div className={classNames("w-100 ", styles.main)}>{children}</div>
       <div className={classNames("w-100", styles.footer)}></div>
     </div>
+  );
+}
+
+function Shell() {
+  return (
+    <ShellWrap>
+      <Outlet />
+    </ShellWrap>
   );
 }
 
