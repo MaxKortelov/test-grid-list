@@ -8,13 +8,135 @@ export interface IRecordsState {
 
 export function loadRecordsState(): IRecordsState {
   return {
-    records: [],
+    records: [
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      },
+      {
+        id: 1,
+        name: "test",
+        address: "street",
+        amount: 20
+      }
+    ],
     filters: initialFilters(),
     pagination: initialPagination()
   };
 }
 
 export interface IRecord {
+  id: number;
   name: string;
   address: string;
   amount: number;

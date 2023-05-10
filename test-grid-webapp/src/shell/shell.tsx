@@ -19,7 +19,9 @@ function ShellWrap({ children }: { children: ReactElement }) {
   };
 
   return (
-    <div className={classNames("d-flex justify-content-center align-items-center flex-column full-screen")}>
+    <div
+      className={classNames("d-flex justify-content-start align-items-center flex-column full-screen overflow-hidden")}
+    >
       <div className={classNames("d-flex justify-content-end align-items-center w-100 px-4", styles.header)}>
         <Button
           className="d-flex justify-content-center align-items-center h-50"
@@ -30,7 +32,9 @@ function ShellWrap({ children }: { children: ReactElement }) {
         </Button>
       </div>
       <div className={classNames("w-100 ", styles.main)}>{children}</div>
-      <div className={classNames("w-100", styles.footer)}></div>
+      <div className={classNames("d-flex  justify-content-end align-items-center w-100 px-4", styles.footer)}>
+        Created by Max Kortelov
+      </div>
     </div>
   );
 }

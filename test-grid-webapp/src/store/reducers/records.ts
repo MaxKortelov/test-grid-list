@@ -1,9 +1,9 @@
 import { IRecordsState, loadRecordsState, RecordsAction } from "../../models/store/records";
 import { RecordsTypes } from "../types/records";
 
-export const initialSettingsState: IRecordsState = loadRecordsState();
+export const initialRecordsState: IRecordsState = loadRecordsState();
 
-export const recordsReducer = (state = initialSettingsState, { type, payload }: RecordsAction): IRecordsState => {
+export const recordsReducer = (state = initialRecordsState, { type, payload }: RecordsAction): IRecordsState => {
   switch (type) {
     case RecordsTypes.CHANGE_RECORDS: {
       return { ...state, records: payload };
