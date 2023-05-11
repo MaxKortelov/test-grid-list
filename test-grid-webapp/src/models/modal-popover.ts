@@ -7,6 +7,7 @@ export interface IModalPopOver {
 export interface IModalContext {
   showModal: (options: IModalOptions) => Promise<Error | null>;
   successModal: () => void;
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   closeModal: (it?: any) => any;
 }
 
@@ -40,6 +41,7 @@ export function initialModalOptions(): IModalOptions {
 }
 
 export interface ILargeModal {
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleOk: (it?: any) => void;
   handleCancel: () => void;
   showModal: boolean;
@@ -48,6 +50,7 @@ export interface ILargeModal {
 }
 
 export interface ILargeModalChildrenProps {
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleOk?: (it?: any) => void;
   handleCancel?: () => void;
   closeModal?: () => void;
@@ -55,6 +58,7 @@ export interface ILargeModalChildrenProps {
 
 export interface IConfirmModal {
   handleCancel: () => void;
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleOk: (it?: any) => void;
   showModal: boolean;
   options: IModalOptions;

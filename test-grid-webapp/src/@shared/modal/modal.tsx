@@ -45,6 +45,7 @@ function ModalPopOverProvider({ children }: IModalPopOver): ReactElement {
     handleCloseModal();
   };
 
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   const confirmResolve = (result: any = null): void => {
     if (promise.current) {
       promise.current?.resolve(result);
