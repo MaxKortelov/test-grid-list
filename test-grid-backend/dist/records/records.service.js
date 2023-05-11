@@ -34,10 +34,12 @@ let RecordsService = class RecordsService {
     }
     findOne(id) {
         return {
-            id: 0,
+            id,
             name: 'test',
             address: 'street Test',
             amount: 0,
+            role: 'ADMIN',
+            status: 'CLOSE',
         };
     }
     update(id, updateRecordDto) {

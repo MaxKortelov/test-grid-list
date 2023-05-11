@@ -8,14 +8,7 @@ export interface IRecordsState {
 
 export function loadRecordsState(): IRecordsState {
   return {
-    records: [
-      {
-        id: 0,
-        name: "test",
-        address: "street Test",
-        amount: 0
-      }
-    ],
+    records: [],
     filters: initialFilters(),
     pagination: initialPagination()
   };

@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
 import useRecordsSelectors from "../../../store/selectors/records";
 import useSettingsSelectors from "../../../store/selectors/settings";
@@ -8,6 +8,7 @@ import { IModalOptions, MODAL_TYPE } from "../../../models/modal-popover";
 import { useModalContext } from "../../../@shared/modal/modal";
 import { useActions } from "../../../hooks/useActions";
 import { deleteRecord } from "../records.service";
+import EditRecord from "../edit-record/edit-record";
 
 function TableRecords(): ReactElement {
   const { records } = useRecordsSelectors();
@@ -38,6 +39,25 @@ function TableRecords(): ReactElement {
       .catch(() => modalContext.showModal(errorOptions));
   };
 
+  const editRecord = async (recordId: number) => {
+    const options: IModalOptions = {
+      type: MODAL_TYPE.LARGE,
+      title: "Add new record",
+      children: <EditRecord recordId={recordId} />,
+      modalContext: modalContext
+    };
+
+    modalContext
+      .showModal(options)
+      .then(() => getRecords())
+      .catch(() => modalContext.closeModal());
+  };
+
+  useEffect(() => {
+    getRecords();
+    //eslint-disable-next-line
+  }, []);
+
   const renderRows = (): ReactElement[] =>
     records.map((record, index) => (
       <tr key={index}>
@@ -49,7 +69,7 @@ function TableRecords(): ReactElement {
           <Button variant={VARIANT.LIGHT} onClick={() => removeRecord(record.id)}>
             <TrashFill />
           </Button>
-          <Button variant={VARIANT.LIGHT}>
+          <Button variant={VARIANT.LIGHT} onClick={() => editRecord(record.id)}>
             <PencilFill />
           </Button>
         </td>

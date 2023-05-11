@@ -31,10 +31,12 @@ export class RecordsService {
 
   findOne(id: number) {
     return {
-      id: 0,
+      id,
       name: 'test',
       address: 'street Test',
       amount: 0,
+      role: 'ADMIN',
+      status: 'CLOSE',
     };
   }
 

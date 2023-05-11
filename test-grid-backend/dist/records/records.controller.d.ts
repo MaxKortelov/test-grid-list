@@ -26,6 +26,8 @@ export declare class RecordsController {
         name: string;
         address: string;
         amount: number;
+        role: string;
+        status: string;
     };
     update(id: string, updateRecordDto: UpdateRecordDto): {
         id: number;

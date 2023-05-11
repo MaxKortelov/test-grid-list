@@ -14,5 +14,5 @@ export function createRecord(record: IEditRecord): Promise<IEditRecord> {
 }
 
 export function updateRecord(record: IEditRecord): Promise<IEditRecord> {
-  return api.put<IEditRecord>(`records`, record).then((res) => res.data);
+  return api.put<IEditRecord>(`records/${record.id}`, record).then((res) => res.data);
 }

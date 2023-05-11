@@ -23,6 +23,8 @@ export declare class RecordsService {
         name: string;
         address: string;
         amount: number;
+        role: string;
+        status: string;
     };
     update(id: number, updateRecordDto: UpdateRecordDto): {
         id: number;
