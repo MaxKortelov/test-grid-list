@@ -1,7 +1,6 @@
 import { IUser, UserAction } from "../../models/store/auth";
 import { UserActionTypes } from "../types/auth";
 import { api } from "../../api";
-import { AxiosResponse } from "axios";
 import { ILoginParams } from "../../models/login";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../reducers";
@@ -11,10 +10,10 @@ export const fetchUserData =
   (loginParams: ILoginParams): ThunkAction<void, RootState, unknown, UserAction> =>
   async (dispatch) => {
     api
-      .get<AxiosResponse<IUser>>("login", {
+      .get<IUser>("login", {
         params: loginParams
       })
-      .then((auth) => dispatch(login(auth.data.data)))
+      .then((auth) => dispatch(login(auth.data)))
       .catch(() => dispatch(loginError("Invalid user")));
   };
 

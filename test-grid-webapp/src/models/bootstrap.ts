@@ -14,3 +14,5 @@ export enum LOADING_STATE {
   DATA,
   ERROR
 }
+
+export const NO_ID = 0;

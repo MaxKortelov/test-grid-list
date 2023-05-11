@@ -8,7 +8,14 @@ export interface IRecordsState {
 
 export function loadRecordsState(): IRecordsState {
   return {
-    records: [],
+    records: [
+      {
+        id: 0,
+        name: "test",
+        address: "street Test",
+        amount: 0
+      }
+    ],
     filters: initialFilters(),
     pagination: initialPagination()
   };
@@ -36,8 +43,8 @@ export enum STATUS_FILTERS {
 
 export enum ROLE {
   CUSTOMER = "CUSTOMER",
-  BUSINESS = "CUSTOMER",
-  ADMIN = "CUSTOMER"
+  BUSINESS = "BUSINESS",
+  ADMIN = "ADMIN"
 }
 
 export enum ROLE_FILTERS {

@@ -3,14 +3,13 @@ import { RecordsTypes } from "../types/records";
 import { api } from "../../api";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../reducers";
-import { AxiosResponse } from "axios";
 import { IRecordsDTO } from "../../models/dto/recordsDTO";
 
 // effects
 
 export const getRecords = (): ThunkAction<void, RootState, unknown, RecordsAction> => async (dispatch, getState) => {
   await api
-    .get<AxiosResponse<IRecordsDTO>>("records", {
+    .get<IRecordsDTO>("records", {
       params: {
         filters: getState().records.filters,
         page: getState().records.pagination.page,
@@ -18,7 +17,7 @@ export const getRecords = (): ThunkAction<void, RootState, unknown, RecordsActio
       }
     })
     .then((res) => {
-      const { records, page, itemsPerPage, pages } = res.data.data;
+      const { records, page, itemsPerPage, pages } = res.data;
       const pagination = { page, itemsPerPage, pages };
       dispatch(changeRecords(records));
       dispatch(changePagination(pagination));

@@ -8,6 +8,8 @@ import {
   MODAL_TYPE
 } from "../../models/modal-popover";
 import LargeModal from "./large-modal/large-modal";
+import ConfirmCloseModal from "./confirm-modal/confirm-modal";
+import InfoModal from "./info-modal/info-modal";
 
 const ModalContext: React.Context<IModalContext> = React.createContext({
   showModal: (it: IModalOptions) => {
@@ -16,7 +18,7 @@ const ModalContext: React.Context<IModalContext> = React.createContext({
   successModal: () => {
     console.info("Function does not exist yet");
   },
-  closeModal: () => {
+  closeModal: (it) => {
     console.info("Function does not exist yet");
   }
 });
@@ -43,9 +45,9 @@ function ModalPopOverProvider({ children }: IModalPopOver): ReactElement {
     handleCloseModal();
   };
 
-  const confirmResolve = (): void => {
+  const confirmResolve = (result: any = null): void => {
     if (promise.current) {
-      promise.current?.resolve(null);
+      promise.current?.resolve(result);
     }
   };
 
@@ -64,7 +66,27 @@ function ModalPopOverProvider({ children }: IModalPopOver): ReactElement {
       {children}
       {/*Large modal*/}
       {options.type === MODAL_TYPE.LARGE && (
-        <LargeModal handleCancel={handleCancel} handleOk={confirmResolve} showModal={showModal} options={options} />
+        <LargeModal
+          handleCancel={handleCancel}
+          handleOk={confirmResolve}
+          closeModal={handleCloseModal}
+          showModal={showModal}
+          options={options}
+        />
+      )}
+
+      {/*Confirm modal*/}
+      {options.type === MODAL_TYPE.CONFIRM_CLOSE && (
+        <ConfirmCloseModal
+          showModal={showModal}
+          options={options}
+          handleCancel={handleCancel}
+          handleOk={confirmResolve}
+        />
+      )}
+      {/*Success modal*/}
+      {options.type === MODAL_TYPE.INFO && (
+        <InfoModal showModal={showModal} options={options} closeModal={handleCloseModal} />
       )}
     </ModalContext.Provider>
   );
