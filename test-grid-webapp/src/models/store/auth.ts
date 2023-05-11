@@ -16,7 +16,7 @@ export interface IUser {
 export function loadAuthData(): IAuthState {
   return {
     user: {
-      id: "123",
+      id: "",
       email: "",
       name: "Unknown",
       surname: ""

@@ -1,0 +1,54 @@
+version: "3.7"
+
+services:
+  backend:
+    build:
+      dockerfile: Dockerfile
+      context: ./../test-grid-backend
+    links:
+      - database
+    depends_on:
+      - database
+    networks:
+      - database
+    ports:
+      - "3001:3001"
+    expose:
+      - 3001
+    restart: always
+
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ./../test-grid-webapp
+    ports:
+      - "3000:3000"
+    expose:
+      - 3000
+    restart: always
+    depends_on:
+      - backend
+
+  database:
+    build:
+      dockerfile: Dockerfile
+      context: ./db
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: test-grid
+    volumes:
+      - test-grid-db:/var/db
+    ports:
+      - "5432:5432"
+    networks:
+      - database
+    expose:
+      - 5432
+
+networks:
+  database:
+    driver: bridge
+volumes:
+  test-grid-db:
