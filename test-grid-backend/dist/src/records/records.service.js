@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const record_entity_1 = require("./entities/record.entity");
+const records_1 = require("../models/records");
 let RecordsService = class RecordsService {
     constructor(recordRepository) {
         this.recordRepository = recordRepository;
@@ -24,12 +25,30 @@ let RecordsService = class RecordsService {
     create(createRecordDto) {
         return this.recordRepository.save(createRecordDto);
     }
-    async findAll() {
-        const records = await this.recordRepository.find();
+    async findAll(params) {
+        const recordQuery = this.recordRepository
+            .createQueryBuilder('users')
+            .where('LOWER(role) LIKE LOWER(:role)', {
+            role: `%${params.filters.role === records_1.ROLE_FILTERS.ALL ? '' : params.filters.role}%`,
+        })
+            .andWhere('LOWER(status) LIKE LOWER(:status)', {
+            status: `%${params.filters.status === records_1.STATUS_FILTERS.ALL
+                ? ''
+                : params.filters.status}%`,
+        })
+            .andWhere('LOWER(name) LIKE LOWER(:name)', {
+            name: `%${params.filters.name}%`,
+        })
+            .orderBy('name', 'DESC');
+        const records = await recordQuery
+            .take(params.itemsPerPage)
+            .skip(params.itemsPerPage * (params.page - 1))
+            .getMany();
+        const row = await recordQuery.getCount();
         return {
-            page: 1,
-            pages: 1,
-            itemsPerPage: 20,
+            page: Number(params.page),
+            pages: Math.ceil(row / params.itemsPerPage),
+            itemsPerPage: params.itemsPerPage,
             records,
         };
     }

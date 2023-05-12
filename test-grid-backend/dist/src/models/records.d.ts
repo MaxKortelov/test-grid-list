@@ -17,6 +17,6 @@ export declare enum ROLE {
 export declare enum ROLE_FILTERS {
     ALL = "ALL",
     CUSTOMER = "CUSTOMER",
-    BUSINESS = "CUSTOMER",
-    ADMIN = "CUSTOMER"
+    BUSINESS = "BUSINESS",
+    ADMIN = "ADMIN"
 }

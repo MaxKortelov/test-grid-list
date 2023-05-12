@@ -1,11 +1,12 @@
 import { RecordsService } from './records.service';
 import { CreateRecordDto } from './dto/create-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
+import { IGetRecordsParams } from './dto/get-records-params';
 export declare class RecordsController {
     private readonly recordsService;
     constructor(recordsService: RecordsService);
     create(createRecordDto: CreateRecordDto): Promise<CreateRecordDto & import("./entities/record.entity").Record>;
-    findAll(): Promise<{
+    findAll(params: IGetRecordsParams): Promise<{
         page: number;
         pages: number;
         itemsPerPage: number;

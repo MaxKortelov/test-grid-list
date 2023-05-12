@@ -24,8 +24,8 @@ let RecordsController = class RecordsController {
     create(createRecordDto) {
         return this.recordsService.create(createRecordDto);
     }
-    findAll() {
-        return this.recordsService.findAll();
+    findAll(params) {
+        return this.recordsService.findAll(params);
     }
     findOne(id) {
         return this.recordsService.findOne(+id);
@@ -46,8 +46,9 @@ __decorate([
 ], RecordsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], RecordsController.prototype, "findAll", null);
 __decorate([

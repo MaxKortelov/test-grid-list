@@ -71,7 +71,7 @@ function Filters() {
 
         <Form.Group className="mb-3 w-100">
           <Form.Label className="text-bold">Role</Form.Label>
-          <Form.Select onSelect={handleSelectRole}>{renderList(roles)}</Form.Select>
+          <Form.Select onChange={handleSelectRole}>{renderList(roles)}</Form.Select>
         </Form.Group>
 
         <Button className="mt-4" variant="danger" onClick={handleOpenModal}>

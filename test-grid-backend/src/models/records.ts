@@ -20,6 +20,6 @@ export enum ROLE {
 export enum ROLE_FILTERS {
   ALL = 'ALL',
   CUSTOMER = 'CUSTOMER',
-  BUSINESS = 'CUSTOMER',
-  ADMIN = 'CUSTOMER',
+  BUSINESS = 'BUSINESS',
+  ADMIN = 'ADMIN',
 }

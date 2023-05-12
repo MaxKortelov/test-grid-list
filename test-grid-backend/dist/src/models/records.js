@@ -24,7 +24,7 @@ var ROLE_FILTERS;
 (function (ROLE_FILTERS) {
     ROLE_FILTERS["ALL"] = "ALL";
     ROLE_FILTERS["CUSTOMER"] = "CUSTOMER";
-    ROLE_FILTERS["BUSINESS"] = "CUSTOMER";
-    ROLE_FILTERS["ADMIN"] = "CUSTOMER";
+    ROLE_FILTERS["BUSINESS"] = "BUSINESS";
+    ROLE_FILTERS["ADMIN"] = "ADMIN";
 })(ROLE_FILTERS = exports.ROLE_FILTERS || (exports.ROLE_FILTERS = {}));
 //# sourceMappingURL=records.js.map
