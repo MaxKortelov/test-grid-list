@@ -1,12 +1,11 @@
 import { CreateRecordDto } from './dto/create-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
+import { Repository } from 'typeorm';
+import { Record } from './entities/record.entity';
 export declare class RecordsService {
-    create(createRecordDto: CreateRecordDto): {
-        id: number;
-        name: string;
-        address: string;
-        amount: number;
-    };
+    private readonly recordRepository;
+    constructor(recordRepository: Repository<Record>);
+    create(createRecordDto: CreateRecordDto): Record;
     findAll(): {
         page: number;
         pages: number;

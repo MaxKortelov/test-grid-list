@@ -10,12 +10,15 @@ exports.RecordsModule = void 0;
 const common_1 = require("@nestjs/common");
 const records_service_1 = require("./records.service");
 const records_controller_1 = require("./records.controller");
+const typeorm_1 = require("@nestjs/typeorm");
+const record_entity_1 = require("./entities/record.entity");
 let RecordsModule = class RecordsModule {
 };
 RecordsModule = __decorate([
     (0, common_1.Module)({
         controllers: [records_controller_1.RecordsController],
         providers: [records_service_1.RecordsService],
+        imports: [typeorm_1.TypeOrmModule.forFeature([record_entity_1.Record])],
     })
 ], RecordsModule);
 exports.RecordsModule = RecordsModule;

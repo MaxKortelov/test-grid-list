@@ -1,16 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRecordDto } from './dto/create-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Record } from './entities/record.entity';
 
 @Injectable()
 export class RecordsService {
+  constructor(
+    @InjectRepository(Record)
+    private readonly recordRepository: Repository<Record>,
+  ) {}
   create(createRecordDto: CreateRecordDto) {
-    return {
-      id: 0,
-      name: 'test',
-      address: 'street Test',
-      amount: 0,
-    };
+    return this.recordRepository.create(createRecordDto);
   }
 
   findAll() {

@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement, useEffect, useLayoutEffect } from "react";
 import { Button, Table } from "react-bootstrap";
 import useRecordsSelectors from "../../../store/selectors/records";
 import useSettingsSelectors from "../../../store/selectors/settings";

@@ -4,12 +4,7 @@ import { UpdateRecordDto } from './dto/update-record.dto';
 export declare class RecordsController {
     private readonly recordsService;
     constructor(recordsService: RecordsService);
-    create(createRecordDto: CreateRecordDto): {
-        id: number;
-        name: string;
-        address: string;
-        amount: number;
-    };
+    create(createRecordDto: CreateRecordDto): import("./entities/record.entity").Record;
     findAll(): {
         page: number;
         pages: number;

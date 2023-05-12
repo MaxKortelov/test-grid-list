@@ -99,7 +99,12 @@ function EditRecord({ recordId = 0, closeModal }: IEditRecordComponent): ReactEl
       <div className="d- flex flex-column w-50 p-3">
         <Form.Group className="mb-3 w-100">
           <Form.Label className="text-bold">Role</Form.Label>
-          <Form.Select onSelect={handleSelectRole} name="role" value={record.role.toLowerCase()}>
+          <Form.Select
+            onSelect={handleSelectRole}
+            name="role"
+            value={record.role.toLowerCase()}
+            onChange={handleSelectRole}
+          >
             {renderList(roles)}
           </Form.Select>
         </Form.Group>

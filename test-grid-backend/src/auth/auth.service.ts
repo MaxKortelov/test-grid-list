@@ -27,13 +27,20 @@ export class AuthService {
       const { email, id, username } = await this.usersService.findOneByEmail(
         decodedJwtAccessToken?.email,
       );
-
-      return {
-        access_token: token,
-        email,
-        id,
-        username,
-      };
+      return this.jwtService
+        .verifyAsync(token)
+        .then(() => ({
+          access_token: token,
+          email,
+          id,
+          username,
+        }))
+        .catch(() => ({
+          access_token: token,
+          email: '',
+          id: 0,
+          username: '',
+        }));
     }
     return new UnauthorizedException();
   }

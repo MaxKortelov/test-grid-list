@@ -1,13 +1,14 @@
 import axios from "axios";
-import { getCookie, setCookie } from "../services/localStorageService";
+import { eraseCookie, getCookie, setCookie } from "../services/localStorageService";
 import { IUser } from "../models/store/auth";
 
 const protocol = process.env.REACT_APP_BACKEND_PROTOCOL + "://";
 const host = process.env.REACT_APP_BACKEND_HOST;
 const port = process.env.REACT_APP_BACKEND_PORT ? ":" + process.env.REACT_APP_BACKEND_PORT : "";
 
-const token = getCookie("token") ?? "";
-console.log(getCookie("token"));
+export interface IAuthDto extends IUser {
+  access_token: string;
+}
 
 export const authApi = axios.create({
   withCredentials: false,
@@ -15,9 +16,9 @@ export const authApi = axios.create({
 });
 
 export const authorize = () =>
-  authApi.get<IUser>("auth", {
+  authApi.get<IAuthDto>("auth", {
     headers: {
-      Authorization: "Bearer " + token
+      Authorization: "Bearer " + getCookie("token")
     }
   });
 
@@ -25,9 +26,21 @@ export let api = axios.create({
   withCredentials: false,
   baseURL: `${protocol}${host}${port}`,
   headers: {
-    Authorization: "Bearer " + token
+    Authorization: "Bearer " + getCookie("token")
   }
 });
+
+api.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    if (error.response.status === 401) {
+      eraseCookie("token");
+    }
+    return Promise.reject(error);
+  }
+);
 
 authApi.interceptors.response.use(
   function (response) {

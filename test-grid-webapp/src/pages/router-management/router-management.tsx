@@ -17,8 +17,8 @@ function RouterManagement(): ReactElement {
   useEffect(() => {
     if (getCookie("token")) {
       authorize().then((response) => {
-        login(response.data);
-        console.log(response);
+        const { access_token, ...user } = response.data;
+        login(user);
       });
     }
   }, []);

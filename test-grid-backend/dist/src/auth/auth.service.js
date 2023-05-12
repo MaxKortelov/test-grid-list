@@ -30,12 +30,20 @@ let AuthService = class AuthService {
         const decodedJwtAccessToken = this.jwtService.decode(token);
         if (typeof decodedJwtAccessToken === 'object') {
             const { email, id, username } = await this.usersService.findOneByEmail(decodedJwtAccessToken === null || decodedJwtAccessToken === void 0 ? void 0 : decodedJwtAccessToken.email);
-            return {
+            return this.jwtService
+                .verifyAsync(token)
+                .then(() => ({
                 access_token: token,
                 email,
                 id,
                 username,
-            };
+            }))
+                .catch(() => ({
+                access_token: token,
+                email: '',
+                id: 0,
+                username: '',
+            }));
         }
         return new common_1.UnauthorizedException();
     }
