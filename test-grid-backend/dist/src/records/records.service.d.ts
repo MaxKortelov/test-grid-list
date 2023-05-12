@@ -5,36 +5,16 @@ import { Record } from './entities/record.entity';
 export declare class RecordsService {
     private readonly recordRepository;
     constructor(recordRepository: Repository<Record>);
-    create(createRecordDto: CreateRecordDto): Record;
-    findAll(): {
+    create(createRecordDto: CreateRecordDto): Promise<CreateRecordDto & Record>;
+    findAll(): Promise<{
         page: number;
         pages: number;
         itemsPerPage: number;
-        records: {
-            id: number;
-            name: string;
-            address: string;
-            amount: number;
-        }[];
-    };
-    findOne(id: number): {
+        records: Record[];
+    }>;
+    findOne(id: number): Promise<Record>;
+    update(id: number, updateRecordDto: UpdateRecordDto): Promise<{
         id: number;
-        name: string;
-        address: string;
-        amount: number;
-        role: string;
-        status: string;
-    };
-    update(id: number, updateRecordDto: UpdateRecordDto): {
-        id: number;
-        name: string;
-        address: string;
-        amount: number;
-    };
-    remove(id: number): {
-        id: number;
-        name: string;
-        address: string;
-        amount: number;
-    };
+    } & Record>;
+    remove(id: number): Promise<import("typeorm").DeleteResult>;
 }

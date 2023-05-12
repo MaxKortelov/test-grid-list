@@ -60,6 +60,11 @@ function ModalPopOverProvider({ children }: IModalPopOver): ReactElement {
     setOptions(initialModalOptions());
   };
 
+  const confirmAndClose = (): void => {
+    handleCloseModal();
+    confirmResolve();
+  };
+
   return (
     <ModalContext.Provider
       value={{ showModal: handleShowModal, successModal: handleSetSuccess, closeModal: handleCloseModal }}
@@ -70,7 +75,7 @@ function ModalPopOverProvider({ children }: IModalPopOver): ReactElement {
         <LargeModal
           handleCancel={handleCancel}
           handleOk={confirmResolve}
-          closeModal={handleCloseModal}
+          closeModal={confirmAndClose}
           showModal={showModal}
           options={options}
         />

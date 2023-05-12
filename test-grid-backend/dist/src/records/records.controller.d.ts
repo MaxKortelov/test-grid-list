@@ -4,36 +4,16 @@ import { UpdateRecordDto } from './dto/update-record.dto';
 export declare class RecordsController {
     private readonly recordsService;
     constructor(recordsService: RecordsService);
-    create(createRecordDto: CreateRecordDto): import("./entities/record.entity").Record;
-    findAll(): {
+    create(createRecordDto: CreateRecordDto): Promise<CreateRecordDto & import("./entities/record.entity").Record>;
+    findAll(): Promise<{
         page: number;
         pages: number;
         itemsPerPage: number;
-        records: {
-            id: number;
-            name: string;
-            address: string;
-            amount: number;
-        }[];
-    };
-    findOne(id: string): {
+        records: import("./entities/record.entity").Record[];
+    }>;
+    findOne(id: string): Promise<import("./entities/record.entity").Record>;
+    update(id: string, updateRecordDto: UpdateRecordDto): Promise<{
         id: number;
-        name: string;
-        address: string;
-        amount: number;
-        role: string;
-        status: string;
-    };
-    update(id: string, updateRecordDto: UpdateRecordDto): {
-        id: number;
-        name: string;
-        address: string;
-        amount: number;
-    };
-    remove(id: string): {
-        id: number;
-        name: string;
-        address: string;
-        amount: number;
-    };
+    } & import("./entities/record.entity").Record>;
+    remove(id: string): Promise<import("typeorm").DeleteResult>;
 }

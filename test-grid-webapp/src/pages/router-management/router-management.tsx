@@ -17,10 +17,11 @@ function RouterManagement(): ReactElement {
   useEffect(() => {
     if (getCookie("token")) {
       authorize().then((response) => {
-        const { access_token, ...user } = response.data;
+        const { access_token: _, ...user } = response.data;
         login(user);
       });
     }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

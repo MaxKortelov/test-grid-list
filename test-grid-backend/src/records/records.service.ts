@@ -12,51 +12,31 @@ export class RecordsService {
     private readonly recordRepository: Repository<Record>,
   ) {}
   create(createRecordDto: CreateRecordDto) {
-    return this.recordRepository.create(createRecordDto);
+    return this.recordRepository.save(createRecordDto);
   }
 
-  findAll() {
+  async findAll() {
+    const records = await this.recordRepository.find();
     return {
       page: 1,
       pages: 1,
       itemsPerPage: 20,
-      records: [
-        {
-          id: 0,
-          name: '123',
-          address: '123',
-          amount: 0,
-        },
-      ],
+      records,
     };
   }
 
   findOne(id: number) {
-    return {
-      id,
-      name: 'test',
-      address: 'street Test',
-      amount: 0,
-      role: 'ADMIN',
-      status: 'CLOSE',
-    };
+    return this.recordRepository.findOneBy({ id });
   }
 
   update(id: number, updateRecordDto: UpdateRecordDto) {
-    return {
-      id: 0,
-      name: 'test',
-      address: 'street Test',
-      amount: 0,
-    };
+    return this.recordRepository.save({
+      ...updateRecordDto,
+      id,
+    });
   }
 
   remove(id: number) {
-    return {
-      id: 0,
-      name: 'test',
-      address: 'street Test',
-      amount: 0,
-    };
+    return this.recordRepository.delete(id);
   }
 }

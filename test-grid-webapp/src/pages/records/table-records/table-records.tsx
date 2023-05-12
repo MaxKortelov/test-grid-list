@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useLayoutEffect } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
 import useRecordsSelectors from "../../../store/selectors/records";
 import useSettingsSelectors from "../../../store/selectors/settings";
@@ -47,9 +47,10 @@ function TableRecords(): ReactElement {
       modalContext: modalContext
     };
 
-    modalContext
+    await modalContext
       .showModal(options)
       .then(() => getRecords())
+      .then(() => console.log(123))
       .catch(() => modalContext.closeModal());
   };
 
