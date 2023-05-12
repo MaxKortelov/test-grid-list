@@ -1,7 +1,7 @@
 import { ROLE_FILTERS, STATUS_FILTERS } from '../../models/records';
 export interface IGetRecordsParams {
-    page: number;
-    itemsPerPage: number;
+    page: string;
+    itemsPerPage: string;
     filters: {
         name: '';
         status: STATUS_FILTERS;

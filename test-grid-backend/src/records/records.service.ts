@@ -38,16 +38,16 @@ export class RecordsService {
       .orderBy('name', 'DESC');
 
     const records = await recordQuery
-      .take(params.itemsPerPage)
-      .skip(params.itemsPerPage * (params.page - 1))
+      .take(Number(params.itemsPerPage))
+      .skip(Number(params.itemsPerPage) * (Number(params.page) - 1))
       .getMany();
 
     const row = await recordQuery.getCount();
 
     return {
       page: Number(params.page),
-      pages: Math.ceil(row / params.itemsPerPage),
-      itemsPerPage: params.itemsPerPage,
+      pages: Math.ceil(row / Number(params.itemsPerPage)),
+      itemsPerPage: Number(params.itemsPerPage),
       records,
     };
   }

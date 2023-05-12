@@ -15,8 +15,9 @@ function Filters() {
   const { filters } = useRecordsSelectors();
   const statusList = useMemo(() => Object.values(STATUS_FILTERS), []);
   const roles = useMemo(() => Object.values(ROLE_FILTERS), []);
-  const { changeFilters, getRecords } = useActions();
+  const { changeFilters, getRecords, changePagination } = useActions();
   const modalContext = useModalContext();
+  const { pagination } = useRecordsSelectors();
 
   const renderList = (list: string[]): ReactElement[] =>
     list.map((it, index) => (
@@ -27,16 +28,19 @@ function Filters() {
 
   const handleSelectStatus = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     changeFilters({ ...filters, status: e.target.value.toUpperCase() as STATUS_FILTERS });
+    changePagination({ ...pagination, page: 1 });
     getRecords();
   };
 
   const handleSelectRole = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     changeFilters({ ...filters, role: e.target.value.toUpperCase() as ROLE_FILTERS });
+    changePagination({ ...pagination, page: 1 });
     getRecords();
   };
 
   const handleChangeNameFilter = (e: React.ChangeEvent<HTMLInputElement>): void => {
     changeFilters({ ...filters, name: e.target.value });
+    changePagination({ ...pagination, page: 1 });
     getRecords();
   };
 
