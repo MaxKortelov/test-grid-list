@@ -2,9 +2,9 @@ import React, { ReactElement, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CABINET_RECORDS_ROUTE, CABINET_ROUTE, LOGIN_ROUTE } from "../../models/routes";
 import useAuthSelectors from "../../store/selectors/auth";
-import { getCookie } from "../../services/localStorageService";
 import { authorize } from "../../api";
 import { useActions } from "../../hooks/useActions";
+import { getStorageItem } from "../../services/localStorageService";
 
 function RouterManagement(): ReactElement {
   const location = useLocation();
@@ -15,7 +15,7 @@ function RouterManagement(): ReactElement {
   const { login } = useActions();
 
   useEffect(() => {
-    if (getCookie("token")) {
+    if (getStorageItem("token")) {
       authorize().then((response) => {
         const { access_token: _, ...user } = response.data;
         login(user);

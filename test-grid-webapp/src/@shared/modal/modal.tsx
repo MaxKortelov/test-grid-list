@@ -10,6 +10,7 @@ import {
 import LargeModal from "./large-modal/large-modal";
 import ConfirmCloseModal from "./confirm-modal/confirm-modal";
 import InfoModal from "./info-modal/info-modal";
+import { CANCELLED_ACTION } from "../../models/bootstrap";
 
 const ModalContext: React.Context<IModalContext> = React.createContext({
   showModal: (it: IModalOptions) => {
@@ -40,7 +41,7 @@ function ModalPopOverProvider({ children }: IModalPopOver): ReactElement {
   const handleCancel = (): void => {
     if (promise.current) {
       // Throws error on rejection
-      promise.current?.reject("Canceled action");
+      promise.current?.reject(CANCELLED_ACTION);
     }
     handleCloseModal();
   };

@@ -16,3 +16,4 @@ export enum LOADING_STATE {
 }
 
 export const NO_ID = 0;
+export const CANCELLED_ACTION = "Canceled action";

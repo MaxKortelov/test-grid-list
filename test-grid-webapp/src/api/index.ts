@@ -1,6 +1,6 @@
 import axios from "axios";
-import { eraseCookie, getCookie, setCookie } from "../services/localStorageService";
 import { IUser } from "../models/store/auth";
+import { getStorageItem, removeStorageItem, setStorageItem } from "../services/localStorageService";
 
 const protocol = process.env.REACT_APP_BACKEND_PROTOCOL + "://";
 const host = process.env.REACT_APP_BACKEND_HOST;
@@ -18,7 +18,7 @@ export const authApi = axios.create({
 export const authorize = () =>
   authApi.get<IAuthDto>("auth", {
     headers: {
-      Authorization: "Bearer " + getCookie("token")
+      Authorization: "Bearer " + getStorageItem("token")
     }
   });
 
@@ -26,7 +26,7 @@ export let api = axios.create({
   withCredentials: false,
   baseURL: `${protocol}${host}${port}`,
   headers: {
-    Authorization: "Bearer " + getCookie("token")
+    Authorization: "Bearer " + getStorageItem("token")
   }
 });
 
@@ -36,7 +36,7 @@ api.interceptors.response.use(
   },
   function (error) {
     if (error.response.status === 401) {
-      eraseCookie("token");
+      removeStorageItem("token");
     }
     return Promise.reject(error);
   }
@@ -44,7 +44,7 @@ api.interceptors.response.use(
 
 authApi.interceptors.response.use(
   function (response) {
-    setCookie("token", response.data.access_token);
+    setStorageItem("token", response.data.access_token);
     // reassigned api with credentials
     api = axios.create({
       withCredentials: false,

@@ -3,7 +3,7 @@ import { Button, Table } from "react-bootstrap";
 import useRecordsSelectors from "../../../store/selectors/records";
 import useSettingsSelectors from "../../../store/selectors/settings";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
-import { VARIANT } from "../../../models/bootstrap";
+import { CANCELLED_ACTION, VARIANT } from "../../../models/bootstrap";
 import { IModalOptions, MODAL_TYPE } from "../../../models/modal-popover";
 import { useModalContext } from "../../../@shared/modal/modal";
 import { useActions } from "../../../hooks/useActions";
@@ -36,7 +36,11 @@ function TableRecords(): ReactElement {
       .then(async () => await deleteRecord(recordId))
       .then(() => getRecords())
       .then(() => modalContext.closeModal())
-      .catch(() => modalContext.showModal(errorOptions));
+      .catch((error) => {
+        if (error !== CANCELLED_ACTION) {
+          modalContext.showModal(errorOptions);
+        }
+      });
   };
 
   const editRecord = async (recordId: number) => {
@@ -50,7 +54,6 @@ function TableRecords(): ReactElement {
     await modalContext
       .showModal(options)
       .then(() => getRecords())
-      .then(() => console.log(123))
       .catch(() => modalContext.closeModal());
   };
 
