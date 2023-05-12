@@ -7,19 +7,17 @@ export interface IAuthState {
 }
 
 export interface IUser {
-  id: string;
+  id: number;
   email: string;
-  name: string;
-  surname: string;
+  username: string;
 }
 
 export function loadAuthData(): IAuthState {
   return {
     user: {
-      id: "",
+      id: 0,
       email: "",
-      name: "Unknown",
-      surname: ""
+      username: "Unknown"
     },
     state: LOADING_STATE.INITIAL
   };

@@ -2,6 +2,9 @@ import React, { ReactElement, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CABINET_RECORDS_ROUTE, CABINET_ROUTE, LOGIN_ROUTE } from "../../models/routes";
 import useAuthSelectors from "../../store/selectors/auth";
+import { getCookie } from "../../services/localStorageService";
+import { authorize } from "../../api";
+import { useActions } from "../../hooks/useActions";
 
 function RouterManagement(): ReactElement {
   const location = useLocation();
@@ -9,10 +12,20 @@ function RouterManagement(): ReactElement {
   const {
     user: { id }
   } = useAuthSelectors();
+  const { login } = useActions();
+
+  useEffect(() => {
+    if (getCookie("token")) {
+      authorize().then((response) => {
+        login(response.data);
+        console.log(response);
+      });
+    }
+  }, []);
 
   useEffect(() => {
     function checkAuthentication(): void {
-      const isAuthorized = id.length > 0;
+      const isAuthorized = id > 0;
       return isAuthorized ? navigate(CABINET_ROUTE) : navigate(LOGIN_ROUTE);
     }
     checkAuthentication();

@@ -15,7 +15,7 @@ let RecordsModule = class RecordsModule {
 RecordsModule = __decorate([
     (0, common_1.Module)({
         controllers: [records_controller_1.RecordsController],
-        providers: [records_service_1.RecordsService]
+        providers: [records_service_1.RecordsService],
     })
 ], RecordsModule);
 exports.RecordsModule = RecordsModule;

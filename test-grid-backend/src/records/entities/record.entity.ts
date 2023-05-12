@@ -1,6 +1,7 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ROLE, STATUS } from '../../models/records';
 
+@Entity()
 export class Record {
   @PrimaryGeneratedColumn({
     name: 'id',

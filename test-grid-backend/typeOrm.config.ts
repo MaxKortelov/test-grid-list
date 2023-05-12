@@ -2,6 +2,8 @@ import { ConfigService } from '@nestjs/config';
 import * as dotenv from 'dotenv';
 import { DB_ENV } from './src/models/config/db-config';
 import { DataSource } from 'typeorm';
+import { User } from './src/users/entities/user.entity';
+import { Record } from './src/records/entities/record.entity';
 
 dotenv.config({ path: `.${process.env.NODE_ENV}.env` });
 
@@ -24,7 +26,7 @@ export default new DataSource({
   database: configService.get<string>(DB_ENV.POSTGRES_DB, {
     infer: true,
   }),
-  entities: ['./src/**/entities/*.ts'],
+  entities: [User, Record],
   migrations: ['./migrations/**.ts'],
   synchronize: true,
   logging: false,

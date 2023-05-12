@@ -12,13 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
 const uuid_1 = require("uuid");
-class User {
-}
+let User = class User {
+};
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)({
         name: 'id',
     }),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], User.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({
@@ -68,5 +68,8 @@ __decorate([
     }),
     __metadata("design:type", Date)
 ], User.prototype, "dateUpdated", void 0);
+User = __decorate([
+    (0, typeorm_1.Entity)()
+], User);
 exports.User = User;
 //# sourceMappingURL=user.entity.js.map

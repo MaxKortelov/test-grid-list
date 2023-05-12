@@ -16,6 +16,7 @@ const config_1 = require("@nestjs/config");
 const app_config_1 = require("./config/app-config");
 const typeorm_1 = require("@nestjs/typeorm");
 const db_config_1 = require("./config/db-config");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -29,6 +30,7 @@ AppModule = __decorate([
                 useFactory: db_config_1.dbConfig,
                 inject: [config_1.ConfigService],
             }),
+            auth_module_1.AuthModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

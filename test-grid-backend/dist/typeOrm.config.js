@@ -4,6 +4,8 @@ const config_1 = require("@nestjs/config");
 const dotenv = require("dotenv");
 const db_config_1 = require("./src/models/config/db-config");
 const typeorm_1 = require("typeorm");
+const user_entity_1 = require("./src/users/entities/user.entity");
+const record_entity_1 = require("./src/records/entities/record.entity");
 dotenv.config({ path: `.${process.env.NODE_ENV}.env` });
 const configService = new config_1.ConfigService();
 exports.default = new typeorm_1.DataSource({
@@ -23,7 +25,7 @@ exports.default = new typeorm_1.DataSource({
     database: configService.get(db_config_1.DB_ENV.POSTGRES_DB, {
         infer: true,
     }),
-    entities: ['./src/**/entities/*.ts'],
+    entities: [user_entity_1.User, record_entity_1.Record],
     migrations: ['./migrations/**.ts'],
     synchronize: true,
     logging: false,

@@ -12,8 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Record = void 0;
 const typeorm_1 = require("typeorm");
 const records_1 = require("../../models/records");
-class Record {
-}
+let Record = class Record {
+};
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)({
         name: 'id',
@@ -55,5 +55,8 @@ __decorate([
     }),
     __metadata("design:type", Number)
 ], Record.prototype, "amount", void 0);
+Record = __decorate([
+    (0, typeorm_1.Entity)()
+], Record);
 exports.Record = Record;
 //# sourceMappingURL=record.entity.js.map

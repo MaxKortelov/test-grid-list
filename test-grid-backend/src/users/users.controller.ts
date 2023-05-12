@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -24,7 +25,7 @@ export class UsersController {
   @Get()
   findAll() {
     // TODO - Needs to be implemented
-    return this.usersService.findAll();
+    // return this.usersService.findAll();
   }
 
   @Get(':id')

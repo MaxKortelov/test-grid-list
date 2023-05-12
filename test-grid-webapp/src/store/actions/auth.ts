@@ -1,6 +1,6 @@
 import { IUser, UserAction } from "../../models/store/auth";
 import { UserActionTypes } from "../types/auth";
-import { api } from "../../api";
+import { authApi } from "../../api";
 import { ILoginParams } from "../../models/login";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../reducers";
@@ -9,10 +9,8 @@ import { RootState } from "../reducers";
 export const fetchUserData =
   (loginParams: ILoginParams): ThunkAction<void, RootState, unknown, UserAction> =>
   async (dispatch) => {
-    api
-      .get<IUser>("login", {
-        params: loginParams
-      })
+    authApi
+      .post<IUser>("auth/login", loginParams)
       .then((auth) => dispatch(login(auth.data)))
       .catch(() => dispatch(loginError("Invalid user")));
   };

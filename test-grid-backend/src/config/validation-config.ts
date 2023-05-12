@@ -9,6 +9,7 @@ export const validationSchema = Joi.object({
   POSTGRES_DB: Joi.string().default(DB_ENV.POSTGRES_DB),
   POSTGRES_USER: Joi.string().default(DB_ENV.POSTGRES_USER),
   POSTGRES_PASSWORD: Joi.string().default(DB_ENV.POSTGRES_PASSWORD),
+  SECRET: Joi.string().default('NO VALUE'),
 });
 
 export const validationOptions = {
