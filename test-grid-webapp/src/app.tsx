@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import styles from "./app.module.scss";
 import Loading from "./pages/loading/loading";
 import NotFound from "./pages/not-found/not-found";
 import { ANY_ROUTE, CABINET_RECORDS_ROUTE, CABINET_ROUTE, LOGIN_ROUTE } from "./models/routes";
@@ -22,7 +21,7 @@ function App() {
   return (
     <div className="app" data-theme={theme}>
       <Suspense fallback={<Loading />}>
-        <div className={styles.app}>
+        <div className="app">
           <RouterManagement />
           <Routes>
             <Route path={LOGIN_ROUTE} element={<Login />} />
