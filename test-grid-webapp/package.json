@@ -29,7 +29,7 @@
   "scripts": {
     "start": "react-scripts start",
     "dev": "TSC_COMPILE_ON_ERROR=true react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

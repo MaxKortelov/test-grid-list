@@ -1,15 +1,16 @@
-FROM node:18.13.0
+FROM node:18.12.1-buster-slim AS builder
 
 WORKDIR /app
+COPY package.json package-lock.json ./
+COPY . .
+RUN npm ci --legacy-peer-deps
+RUN npm run build
 
-COPY package*.json /app/
-
-RUN npm install --legacy-peer-deps
-
-COPY . /app/
-
-ENV PORT 3000
-
-EXPOSE $PORT
-
-CMD ["npm", "run", "start"]
+FROM nginx:1.23.2-alpine
+COPY config/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/build /usr/share/nginx/html
+RUN touch /var/run/nginx.pid
+RUN chown -R nginx:nginx /var/run/nginx.pid /usr/share/nginx/html /var/cache/nginx /var/log/nginx /etc/nginx/conf.d
+USER nginx
+EXPOSE 3000
+CMD ["nginx", "-g", "daemon off;"]
