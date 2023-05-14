@@ -65,7 +65,7 @@ function TableRecords(): ReactElement {
   const renderRows = (): ReactElement[] =>
     records.map((record, index) => (
       <tr key={index}>
-        <td className="text-center">{index + 1}</td>
+        <td className="text-center">{record.id}</td>
         <td>{record.name}</td>
         <td>{record.amount}</td>
         <td>{record.address}</td>
